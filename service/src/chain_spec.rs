@@ -20,7 +20,7 @@ use primitives::{ed25519, sr25519, Pair, crypto::UncheckedInto};
 use polkadot_primitives::{AccountId, SessionKey};
 use polkadot_runtime::{
 	GenesisConfig, CouncilSeatsConfig, DemocracyConfig, TreasuryConfig, SystemConfig, AuraConfig,
-	SessionConfig, StakingConfig, TimestampConfig, BalancesConfig, Perbill, SessionKeys,
+	SessionConfig, StakingConfig, TimestampConfig, BalancesConfig, Perbill, SessionKeys, WASM_BINARY,
 	GrandpaConfig, SudoConfig, IndicesConfig, Permill, CuratedGrandpaConfig, StakerStatus,
 };
 use telemetry::TelemetryEndpoints;
@@ -76,8 +76,7 @@ fn staging_testnet_config_genesis() -> GenesisConfig {
 
 	GenesisConfig {
 		system: Some(SystemConfig {
-			// TODO: Change after Substrate 1252 is fixed (https://github.com/paritytech/substrate/issues/1252)
-			code: include_bytes!("../../runtime/wasm/target/wasm32-unknown-unknown/release/polkadot_runtime.compact.wasm").to_vec(),
+			code: WASM_BINARY.to_vec(),
 			_genesis_phantom_data: Default::default(),
 			changes_trie_config: Default::default(),
 		}),
@@ -224,8 +223,7 @@ pub fn testnet_genesis(
 
 	GenesisConfig {
 		system: Some(SystemConfig {
-			// TODO: Change after Substrate 1252 is fixed (https://github.com/paritytech/substrate/issues/1252)
-			code: include_bytes!("../../runtime/wasm/target/wasm32-unknown-unknown/release/polkadot_runtime.compact.wasm").to_vec(),
+			code: WASM_BINARY.to_vec(),
 			_genesis_phantom_data: Default::default(),
 			changes_trie_config: Default::default(),
 		}),
